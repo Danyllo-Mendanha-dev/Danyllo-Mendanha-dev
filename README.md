@@ -91,10 +91,6 @@ A exibição de dados utiliza layouts modernos (listas de cards ou tabelas aprim
 
 ![alt text](image-21.png)
 
-Compreendido. Vamos reformatar a documentação de Instalação e Configuração para utilizar o padrão GitHub Flavored Markdown (GFM).
-
-Isso garantirá uma apresentação limpa, padronizada e pronta para ser utilizada em qualquer arquivo README.md em um repositório Git ou em outros sistemas de documentação que suportam Markdown.
-
 ## Resultados e Desafios
 
 O principal resultado deste projeto é a entrega de um Sistema de Gestão de Biblioteca robusto e coeso, que evoluiu de um protótipo funcional para uma aplicação com uma interface de usuário de alto padrão, dotada de um dashboard estratégico, relatórios dinâmicos e fluxos de trabalho intuitivos. Os desafios superados foram cruciais para este amadurecimento. Tecnicamente, a depuração sistemática de erros de estado de sessão e de configuração de rotas do Django, como NoReverseMatch e TemplateDoesNotExist, solidificou a base da aplicação. Conceitualmente, o maior desafio foi o próprio processo de design iterativo: a busca contínua pelo equilíbrio entre a inovação estética e a usabilidade prática, o que nos levou a refinar e, por vezes, reverter decisões de design para alcançar o alinhamento perfeito com a visão do usuário, transformando cada obstáculo em um degrau para a excelência do produto final.
