@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0 font-weight-bold">Gerenciamento de Empréstimos</h2>
+    <a href="{% url 'cadastrar_emprestimo' %}" class="btn btn-primary"
+      ><i class="fas fa-plus-circle mr-2"></i>Novo Empréstimo</a
+    >
+  </div>
+
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a
+        class="nav-link {% if aba_selecionada == 'andamento' %}active{% endif %}"
+        href="{% url 'consultar_emprestimos' %}?aba=andamento"
+      >
+        Em Andamento
+        <span class="badge badge-primary">{{ count_andamento }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link {% if aba_selecionada == 'atrasados' %}active{% endif %}"
+        href="{% url 'consultar_emprestimos' %}?aba=atrasados"
+      >
+        Atrasados <span class="badge badge-danger">{{ count_atrasados }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link {% if aba_selecionada == 'historico' %}active{% endif %}"
+        href="{% url 'consultar_emprestimos' %}?aba=historico"
+      >
+        Histórico
+        <span class="badge badge-secondary">{{ count_historico }}</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="list-group">
+    {% for emprestimo in emprestimos %}
+    <div
+      class="list-group-item list-group-item-action flex-column align-items-start mb-2 shadow-sm border-left-4 {% if emprestimo.status == 'ATRASADO' %}border-danger{% elif emprestimo.status == 'EMPRESTADO' %}border-warning{% else %}border-success{% endif %}"
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <h5 class="mb-1 font-weight-bold">{{ emprestimo.livro.nome }}</h5>
+          <p class="mb-1">
+            <strong>Leitor:</strong> {{ emprestimo.leitor.nome }}
+          </p>
+          <small class="text-muted">Emprestado em {{ emprestimo.data_emprestimo|date:"d/m/Y" }} | Devolução prevista para {{ emprestimo.data_devolucao_prevista|date:"d/m/Y" }}</small>
+        </div>
+        <div class="text-right">
+          {% if emprestimo.status != 'DEVOLVIDO' %}
+          <a
+            href="{% url 'atualizar_emprestimo' emprestimo.pk %}"
+            class="btn btn-success mb-2"
+            >Registrar Devolução</a
+          ><br />
+          {% endif %}
+          <a
+            href="{% url 'excluir_emprestimo' emprestimo.pk %}"
+            class="btn btn-outline-danger btn-sm"
+            >Excluir Registro</a
+          >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="card card-body text-center">
+      <p class="mb-0">Não há empréstimos nesta categoria.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .border-left-4 {
+    border-left-width: 4px !important;
+    border-left-style: solid;
+  }
+</style>
+{% endblock %}

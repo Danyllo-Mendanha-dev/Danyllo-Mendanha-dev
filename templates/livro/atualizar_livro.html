@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="btn btn-link nav-link" href="{% url 'livro_consultar' %}">Voltar para Consulta</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Atualizar Livro: {{ livro.nome }}</h2>
+    <form action="{% url 'atualizar_livro' livro.pk %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success">Atualizar Livro</button>
+    </form>
+</div>
+{% endblock %}

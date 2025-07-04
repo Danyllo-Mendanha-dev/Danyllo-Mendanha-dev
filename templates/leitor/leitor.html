@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="btn btn-link nav-link" href="{% url 'cadastrar_leitor' %}">Cadastrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-link nav-link" href="{% url 'leitor_consultar' %}">Consultar</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    {# O menu-links abaixo é redundante se os links já estão na navbar_actions #}
+    {# Mas se quiser manter um menu interno, ajuste os URLs #}
+    <div class="menu-links d-none"> {# Esconder este div se os links estiverem na navbar #}
+        <a class="btn btn-link" href="{% url 'atualizar_leitor' 0 %}">Atualizar</a> {# PK será dinâmico na consulta #}
+        <a class="btn btn-link" href="{% url 'cadastrar_leitor' %}">Cadastrar</a>
+        <a class="btn btn-link" href="{% url 'excluir_leitor' 0 %}">Excluir</a> {# PK será dinâmico na consulta #}
+        <a class="btn btn-link" href="{% url 'leitor_consultar' %}">Consultar</a>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Bem-vindo à página de Leitores</h4>
+        <p>Utilize esta página para gerenciar os Leitores do sistema da biblioteca. Aqui você pode cadastrar novos leitores, atualizar informações, consultar a lista de leitores cadastrados e excluir registros quando necessário.</p>
+        <hr>
+        <p class="mb-0">Clique nos botões de ação no canto superior direito para começar.</p>
+    </div>
+</div>
+{% endblock %}

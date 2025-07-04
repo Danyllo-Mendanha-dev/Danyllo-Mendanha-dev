@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="btn btn-link nav-link" href="{% url 'livro_consultar' %}">Cancelar</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Confirmar Exclusão</h2>
+    <div class="alert alert-danger" role="alert">
+        <h4>Tem certeza que deseja excluir o livro "{{ livro.nome }}"?</h4>
+        <p>Esta ação não pode ser desfeita.</p>
+    </div>
+    <form action="{% url 'excluir_livro' livro.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    </form>
+</div>
+{% endblock %}

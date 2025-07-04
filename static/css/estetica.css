@@ -1,0 +1,85 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.btn {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.navbar {
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-nav .nav-link {
+  margin: 0 5px;
+}
+
+.navbar-nav .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+form .form-label {
+  font-weight: 500;
+}
+
+table {
+  font-size: 0.95rem;
+}
+
+/* Botões de menu dentro do conteúdo (não na navbar) */
+.content-menu-links {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.content-menu-links a {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #e3e7ee;
+  border: 2px solid #f8fafc;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.content-menu-links a:hover {
+  transform: translateY(-2px);
+  color: #fff;
+  background-color: #0dedfd;
+  border-color: #0dedfd;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .navbar-nav .btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .content-menu-links {
+    position: relative;
+    top: auto;
+    right: auto;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+/* Adicionado para criar um botão extra pequeno */
+.btn-xs {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}

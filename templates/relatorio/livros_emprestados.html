@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'relatorio_index' %}">Voltar para Relatórios</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Relatório: Livros Atualmente Emprestados</h2>
+
+    {% if emprestimos %}
+        <p>Abaixo está a lista de todos os livros que não foram devolvidos.</p>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Livro</th>
+                        <th>Autor</th>
+                        <th>Leitor</th>
+                        <th>Data do Empréstimo</th>
+                        <th>Devolução Prevista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emprestimo in emprestimos %}
+                    <tr>
+                        <td>{{ emprestimo.livro.nome }}</td>
+                        <td>{{ emprestimo.livro.autor }}</td>
+                        <td>{{ emprestimo.leitor.nome }}</td>
+                        <td>{{ emprestimo.data_emprestimo|date:"d/m/Y" }}</td>
+                        <td>{{ emprestimo.data_devolucao_prevista|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-success mt-3">
+            <h4 class="alert-heading">Tudo em ordem!</h4>
+            <p>Não há nenhum livro emprestado no momento.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

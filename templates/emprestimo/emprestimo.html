@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {# Bloco para adicionar links
+específicos na barra de navegação #} {% block navbar_actions %}
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'consultar_emprestimos' %}">Consultar</a>
+  </li>
+</ul>
+{% endblock %} {# Bloco de conteúdo principal da página #} {% block content %}
+<div class="container py-5">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Bem-vindo à página de Empréstimos!</h4>
+    <p>
+      Utilize esta página para gerenciar os empréstimos de livros no sistema da
+      biblioteca. Você pode registrar novos empréstimos, consultar a lista dos
+      empréstimos ativos e registrar devoluções.
+    </p>
+    <hr />
+    <p class="mb-0">
+      Clique nos botões de ação na barra superior para começar.
+    </p>
+  </div>
+</div>
+{% endblock %}

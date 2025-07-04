@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'relatorio_index' %}">Voltar para Relatórios</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Relatório: Histórico de Empréstimos por Livro</h2>
+
+    <form method="GET" action="{% url 'relatorio_historico_livro' %}" class="card card-body mb-4">
+        <div class="form-group">
+            <label for="livro_id"><strong>Selecione um Livro para ver o histórico:</strong></label>
+            <select name="livro_id" id="livro_id" class="form-control">
+                <option value="">---------</option>
+                {% for livro in todos_livros %}
+                    <option value="{{ livro.pk }}" {% if livro_selecionado.pk == livro.pk %}selected{% endif %}>
+                        {{ livro.nome }} - ({{ livro.autor }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Gerar Histórico</button>
+    </form>
+
+    {% if livro_selecionado %}
+        <hr>
+        <h3 class="mb-3">Histórico para: <em>{{ livro_selecionado.nome }}</em></h3>
+
+        {% if emprestimos %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Leitor</th>
+                        <th>Funcionário que Emprestou</th>
+                        <th>Data do Empréstimo</th>
+                        <th>Data da Devolução</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emprestimo in emprestimos %}
+                    <tr>
+                        <td>{{ emprestimo.leitor.nome }}</td>
+                        <td>{{ emprestimo.funcionario.nome|default:"-" }}</td>
+                        <td>{{ emprestimo.data_emprestimo|date:"d/m/Y" }}</td>
+                        <td>{{ emprestimo.data_devolucao_real|date:"d/m/Y"|default:"Não devolvido" }}</td>
+                        <td>{{ emprestimo.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <div class="alert alert-info">Este livro nunca foi emprestado.</div>
+        {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}

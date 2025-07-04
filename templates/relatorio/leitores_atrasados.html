@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'relatorio_index' %}">Voltar para Relatórios</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Relatório: Leitores com Empréstimos Atrasados</h2>
+
+    {% if emprestimos_atrasados %}
+        <p>Abaixo está a lista de todos os empréstimos com a data de devolução ultrapassada.</p>
+        <div class="table-responsive">
+            <table class="table table-danger table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Leitor</th>
+                        <th>Telefone do Leitor</th>
+                        <th>Livro em Atraso</th>
+                        <th>Devolução Prevista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emprestimo in emprestimos_atrasados %}
+                    <tr>
+                        <td>{{ emprestimo.leitor.nome }}</td>
+                        <td>{{ emprestimo.leitor.telefone|default:"Não informado" }}</td>
+                        <td>{{ emprestimo.livro.nome }}</td>
+                        <td>{{ emprestimo.data_devolucao_prevista|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-success mt-3">
+            <h4 class="alert-heading">Nenhuma pendência!</h4>
+            <p>Não há nenhum leitor com empréstimos atrasados no momento.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

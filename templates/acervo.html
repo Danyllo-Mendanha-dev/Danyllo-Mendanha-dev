@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar_actions %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        {% if request.session.funcionario_logado_id %}
+            <a class="nav-link" href="{% url 'home' %}">Menu Principal</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'login' %}">Login de Funcionário</a>
+        {% endif %}
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-3">Nosso Acervo</h2>
+        </div>
+        <div class="col-md-4">
+            <form method="GET" action="{% url 'acervo' %}">
+                <div class="input-group input-group-sm">
+                    <input
+                        type="text"
+                        name="q"
+                        class="form-control"
+                        placeholder="Buscar por título ou autor..."
+                        value="{{ query|default:'' }}"
+                    />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        {% if livros %}
+            {% for livro in livros %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ livro.nome }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ livro.autor }}</h6>
+                        <p class="card-text">
+                            <strong>Gênero:</strong> {{ livro.genero|default:"Não informado" }}<br />
+                            <strong>ISBN:</strong> {{ livro.isbn }}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        {% if livro.status == 'disponivel' %}
+                            <span class="badge badge-success">Disponível</span>
+                        {% else %}
+                            <span class="badge badge-secondary">Emprestado</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning">
+                    Nenhum livro encontrado para a sua busca por "{{ query }}".
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="font-weight-bold">Central de Relatórios</h2>
+        <p class="lead text-muted">Selecione um dos relatórios abaixo para extrair insights do sistema.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center shadow border-danger">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-3">
+                        <i class="fas fa-user-clock fa-3x text-danger"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold">Leitores com Atraso</h5>
+                    <p class="card-text small">Lista todos os leitores com empréstimos cuja devolução está pendente.</p>
+                    
+                    <div class="mt-auto">
+                        <div class="display-4 font-weight-bold my-2">{{ count_atrasados }}</div>
+                        <p class="text-muted small mb-3">empréstimos atrasados</p>
+                        <a href="{% url 'relatorio_leitores_atrasados' %}" class="btn btn-danger">Gerar Relatório</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center shadow-sm border-info">
+                <div class="card-body d-flex flex-column">
+                     <div class="mb-3">
+                        <i class="fas fa-history fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold">Histórico por Livro</h5>
+                    <p class="card-text small">Permite selecionar um livro e visualizar todo o seu histórico de empréstimos.</p>
+                    <div class="mt-auto pt-5">
+                        <a href="{% url 'relatorio_historico_livro' %}" class="btn btn-primary">Iniciar Consulta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center shadow-sm border-success">
+                <div class="card-body d-flex flex-column">
+                     <div class="mb-3">
+                        <i class="fas fa-book-reader fa-3x text-success"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold">Livros Emprestados</h5>
+                    <p class="card-text small">Gera uma lista de todos os livros que não estão disponíveis no acervo.</p>
+                    <div class="mt-auto pt-5">
+                        <a href="{% url 'relatorio_livros_emprestados' %}" class="btn btn-success">Ver Lista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
