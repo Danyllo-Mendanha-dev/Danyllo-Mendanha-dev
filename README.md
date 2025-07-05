@@ -1,7 +1,7 @@
 # Documentação do Projeto: Sistema de Biblioteca
 
-## Nome da Equipe: Os inquebráveis
-
+### Nome da Equipe: Os inquebráveis
+### Nome dos membros: Danyllo Mendanha, Nagafe Martins, Guilherme Pereira, Francisco José, Matheus Rodrigues e Marcos Vinicius.
 ## 1. Visão Geral e Proposta de Valor
    O "Sistema de Biblioteca" é uma aplicação web desenvolvida para a gestão completa do ciclo de vida de uma biblioteca, desde o cadastro de seus recursos (livros, leitores, funcionários) até a orquestração de suas operações centrais (empréstimos e devoluções).
 
